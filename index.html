@@ -868,8 +868,7 @@ footer {
       <div class="about-grid">
         <div class="about-portrait">
           <div class="portrait-photo-wrap" style="position:relative;width:160px;height:160px;margin:0 auto 20px;">
-            <img id="ceo-photo" src="" alt="Matlema Rakgwale" style="width:160px;height:160px;border-radius:50%;object-fit:cover;object-position:center;display:none;border:4px solid var(--gold-main);box-shadow:0 0 0 6px rgba(212,160,23,0.15),0 0 0 12px rgba(212,160,23,0.06);" />
-            <div id="ceo-initials" style="width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg,var(--gold-main),var(--gold-bright));display:flex;align-items:center;justify-content:center;font-family:Playfair Display,serif;font-size:3rem;font-weight:900;color:var(--blue-dark);box-shadow:0 0 0 6px rgba(212,160,23,0.15),0 0 0 12px rgba(212,160,23,0.06);">R</div>
+            <img id="ceo-photo" src="image.jpg" style="width:100%;border-radius:16px;" />
           </div>
           <h3>Matlema Rakgwale</h3>
           <p>Founder & CEO</p>
@@ -1502,7 +1501,6 @@ function submitWebdev() {
 }
 
 // ===== ADMIN =====
-// Credentials stored as SHA-256 hashes — plaintext passwords are never in the source
 const ADMIN_HASHES = {
   user: '0f11c269ac0767f95e9b14d43885edba83fa9d5ee4199cf9bc5d8020867ca7f3',
   pass: '69e45613e534dab256a77929d08c579e7025fc8ca2d48c86898556af54e460fb'
@@ -1573,39 +1571,7 @@ function adminLoadCEOPhoto(event) {
   };
   reader.readAsDataURL(file);
 }
-// Restore saved photo on load (About page display only — no upload controls shown publicly)
-window.addEventListener('load', function() {
-  try {
-    const saved = localStorage.getItem('rakgwale_ceo_photo');
-    if (saved) {
-      const img = document.getElementById('ceo-photo');
-      const initials = document.getElementById('ceo-initials');
-      img.src = saved;
-      img.style.display = 'block';
-      initials.style.display = 'none';
-    }
-  } catch(err) {}
-});
-
-// Sync admin panel CEO preview whenever the dashboard is opened
-function syncAdminCEOPreview() {
-  try {
-    const saved = localStorage.getItem('rakgwale_ceo_photo');
-    const adminPreview = document.getElementById('admin-ceo-preview');
-    const adminInitials = document.getElementById('admin-ceo-initials');
-    if (saved) {
-      adminPreview.src = saved;
-      adminPreview.style.display = 'block';
-      adminInitials.style.display = 'none';
-    } else {
-      adminPreview.style.display = 'none';
-      adminInitials.style.display = 'flex';
-    }
-    const hint = document.getElementById('admin-ceo-hint');
-    if (hint) { hint.textContent = 'JPG, PNG or WEBP supported'; hint.style.color = 'var(--text-muted)'; }
-  } catch(err) {}
-}
-
+  
 // Close overlays on background click
 document.getElementById('adminLogin').addEventListener('click', function(e) {
   if (e.target === this) closeAdminLogin();
